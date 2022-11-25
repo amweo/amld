@@ -1,8 +1,14 @@
+using Amld.Logs.API.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 
 
 builder.Services.AddControllers();
+
+//ES¿Í»§¶Ë
+builder.Services.AddElastic(builder.Configuration);
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

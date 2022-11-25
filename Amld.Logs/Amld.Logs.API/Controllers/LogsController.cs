@@ -1,4 +1,5 @@
-﻿using Amld.Logs.API.Models.DTO;
+﻿using Amld.Logs.API.Models;
+using Amld.Logs.API.Models.DTO;
 using Amld.Logs.API.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,23 +11,23 @@ namespace Amld.Logs.API.Controllers
     {
         //查询列表
         [HttpGet("list")]
-        public IEnumerable<Message> All([FromQuery] AllReq listReq)
-        { 
-            throw new NotImplementedException();
+        public GR<List<Message>> All([FromQuery] AllReq listReq)
+        {
+            return GR.Success(new List<Message>());
         }
 
         //链路列表
         [HttpGet("chian-logs")]
-        public IEnumerable<Message> ChainLogs([FromBody] ChainReq chainReq)
+        public GR<List<Message>> ChainLogs([FromBody] ChainReq chainReq)
         {
-            throw new NotImplementedException();
+            return GR.Success(new List<Message>());
         }
 
         //日志详情
         [HttpGet("detail")]
-        public Message Detail(string id)
+        public GR<Message> Detail(string id)
         {
-            throw new NotImplementedException();
+            return GR.Success(new Message());
         }
 
     }
