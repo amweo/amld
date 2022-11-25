@@ -11,23 +11,23 @@ namespace Amld.Logs.API.Controllers
     {
         //查询列表
         [HttpGet("list")]
-        public GR<List<Message>> All([FromQuery] AllReq listReq)
+        public GR<List<LogMessage>> All([FromQuery] AllReq listReq)
         {
-            return GR.Success(new List<Message>());
+            return GR.Success(new List<LogMessage>());
         }
 
         //链路列表
         [HttpGet("chian-logs")]
-        public GR<List<Message>> ChainLogs([FromBody] ChainReq chainReq)
+        public GR<List<LogMessage>> ChainLogs([FromBody] ChainReq chainReq)
         {
-            return GR.Success(new List<Message>());
+            return GR.Success(new List<LogMessage>());
         }
 
         //日志详情
         [HttpGet("detail")]
-        public GR<Message> Detail(string id)
+        public GR<LogDetailMessage> Detail(string id)
         {
-            return GR.Success(new Message());
+            return GR.Success(new LogDetailMessage());
         }
 
     }

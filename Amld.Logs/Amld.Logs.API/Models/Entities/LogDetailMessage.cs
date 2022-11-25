@@ -1,6 +1,6 @@
 ﻿namespace Amld.Logs.API.Models.Entities
 {
-    public class Message
+    public class LogDetailMessage
     {
     }
 }
