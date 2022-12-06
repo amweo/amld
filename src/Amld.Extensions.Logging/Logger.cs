@@ -78,7 +78,8 @@ namespace Amld.Extensions.Logging
                 LogLevel = StrLogLevel(logLevel),
                 EventId = eventId.Id,
                 Exception = exception?.ToString(),
-                Message = state?.ToString()
+                Message = state?.ToString(),
+                CreateTime= DateTime.Now,
             };
             if (LoggerOption.Console)
             {
@@ -135,12 +136,10 @@ namespace Amld.Extensions.Logging
                     color = ConsoleColor.Red;
                     break;
             }
-            Console.ForegroundColor = color;
-            Console.WriteLine("");
-            Console.WriteLine("===================================================================================");
-            Console.WriteLine(message.ToIndentedJson());
-            Console.WriteLine("");
             Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine("===================================================================================");
+            Console.ForegroundColor = color;
+            Console.WriteLine(message.ToIndentedJson());
         }
     }
 }
