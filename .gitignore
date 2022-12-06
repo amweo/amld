@@ -9,3 +9,5 @@
 /src/Amld.Extensions.Logging.Test/bin
 /src/Amld.Extensions.Logging.Test/obj
 /src/.vs
+/src/Amld.Extensions.Logging.Kafka/obj
+/src/Amld.Extensions.Logging.Kafka/bin

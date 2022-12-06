@@ -2,7 +2,7 @@
 
 namespace Amld.Extensions.Logging
 {
-    internal static class JsonUtil
+    public static class JsonUtil
     {
         private static readonly JsonSerializerOptions _IndentedJsonOptions = new JsonSerializerOptions { 
             WriteIndented = true,

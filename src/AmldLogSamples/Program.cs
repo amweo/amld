@@ -1,4 +1,5 @@
 ﻿using Amld.Extensions.Logging;
+using Amld.Extensions.Logging.Kafka;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -9,9 +10,11 @@ using IHost host = Host.CreateDefaultBuilder(args)
     {
         config.AddJsonFile($"appsettings.json", false, true);
     })
-    .ConfigureLogging(builder => { 
-        builder.ClearProviders().AddAmldLogger();
-        }).Build();
+    .ConfigureLogging((context, logging) => {
+        logging.ClearProviders();
+        logging.AddAmldLogger()
+        .AddKafkaWriter(context.Configuration);
+    }).Build();
 
 Enhancer.Current.AppId = "AmldLogSamples";
 Enhancer.Current.ChainId = Guid.NewGuid().ToString("N");
