@@ -2,3 +2,9 @@
 /Amld.Logs/Amld.Logs.API/obj
 /Amld.Logs/Amld.Logs.API/bin
 /Amld.Logs/Amld.Logs.API/*.user
+/src/AmldLogSamples/obj
+/src/AmldLogSamples/bin
+/src/Amld.Extensions.Logging/bin
+/src/Amld.Extensions.Logging/obj
+/src/Amld.Extensions.Logging.Test/bin
+/src/Amld.Extensions.Logging.Test/obj

@@ -1,0 +1,12 @@
+@import "~ng-devui/styles-var/devui-var.scss";
+
+.layout-wrapper {
+  background-color: $devui-base-bg;
+}
+
+d-header {
+  height: 40px;
+  background-color: $devui-base-bg-dark;
+  box-shadow: var(--devui-shadow-length-connected-overlay, 0 4px 8px 0)
+    var(--devui-light-shadow, rgba(37, 43, 58, 0.1));
+}
