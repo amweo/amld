@@ -8,6 +8,6 @@ namespace Amld.Extensions.Logging.Kafka
         /// 获取生产者
         /// </summary>
         /// <returns></returns>
-        IProducer<Null, string> Producer();
+        IProducer<Null, LogEntry> Producer();
     }
 }

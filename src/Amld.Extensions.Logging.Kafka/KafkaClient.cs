@@ -5,8 +5,8 @@ namespace Amld.Extensions.Logging.Kafka
 {
     public class KafkaClient : IKafkaClient
     {
-        private object _lock = new object();
-        private IProducer<Null, string> _producer;
+        private static object _lock = new();
+        private IProducer<Null, LogEntry> _producer;
         private KafkaOption _kafkaOption;
         private readonly IDisposable _onChangeToken;
 
@@ -15,12 +15,10 @@ namespace Amld.Extensions.Logging.Kafka
             _kafkaOption = options.CurrentValue;
             _onChangeToken = options.OnChange(ReBuild);
         }
-
-
         /// <summary>
         /// 构建Producer
         /// </summary>
-        public IProducer<Null, string> Producer()
+        public IProducer<Null, LogEntry> Producer()
         {
             if (_producer!=null)
             {
@@ -34,9 +32,9 @@ namespace Amld.Extensions.Logging.Kafka
             return _producer;
         }
 
-        private IProducer<Null, string> Build() 
+        private IProducer<Null, LogEntry> Build() 
         {
-            return new ProducerBuilder<Null, string>(new ProducerConfig
+            return new ProducerBuilder<Null, LogEntry>(new ProducerConfig
             {
                 BootstrapServers = _kafkaOption.BootstrapServers,
                 SaslMechanism = (SaslMechanism)_kafkaOption.SaslMechanism,
@@ -56,18 +54,20 @@ namespace Amld.Extensions.Logging.Kafka
             var oldProducer = _producer;
             _producer = Producer();
 
-            //强制缓存数据推送到Broker
-            oldProducer.Flush();
+            //数据推送到Broker
+            oldProducer?.Flush();
             //释放资源
-            oldProducer.Dispose();
+            oldProducer?.Dispose();
         }
 
         public void Dispose()
         {
+            _onChangeToken?.Dispose();
+
             //释放kafka资源
-            _producer.Flush();
-            _producer.Dispose();
-            _onChangeToken.Dispose();
+            _producer?.Flush();
+            _producer?.Dispose();
+
         }
     }
 }
