@@ -70,7 +70,7 @@ namespace Amld.Extensions.Logging
             }
             var log = new LogEntry
             {
-                AppId = Enhancer.Current.AppId,
+                AppId = Enhancer.AppId,
                 ChainId = Enhancer.Current.ChainId,
                 TraceId = Enhancer.Current.TraceId,
                 ParentTraceId = Enhancer.Current.ParentTraceId,
