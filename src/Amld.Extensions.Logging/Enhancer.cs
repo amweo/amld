@@ -12,7 +12,7 @@ namespace Amld.Extensions.Logging
         public static Enhancer Current => _local.Value ??= new Enhancer();
 
 
-        public string AppId { get; set; }
+        public string  AppId { get; set; }
         public string ChainId { get; set; }
         public string TraceId { get; set; }
         public string ParentTraceId { get; set; }

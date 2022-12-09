@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Amld.Extensions.Logging.DiskFile;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
@@ -12,6 +13,8 @@ namespace Amld.Extensions.Logging
         {
             builder.AddConfiguration();
 
+
+            builder.Services.TryAddSingleton<IFileWriter, FileWriter>();
             builder.Services.TryAddSingleton<ILoggerWriter, NullLoggerWriter>();
             builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<ILoggerProvider, LoggerProvider>());
             LoggerProviderOptions.RegisterProviderOptions<LoggerOption, LoggerProvider>(builder.Services);

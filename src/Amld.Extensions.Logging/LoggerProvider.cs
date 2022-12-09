@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Amld.Extensions.Logging.DiskFile;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Collections.Concurrent;
 
@@ -12,11 +13,12 @@ namespace Amld.Extensions.Logging
         private readonly IDisposable? _onChangeToken;
         private readonly Processor _processor;
 
-        public LoggerProvider(IOptionsMonitor<LoggerOption> options, ILoggerWriter loggerWriter)
+
+        public LoggerProvider(IOptionsMonitor<LoggerOption> options, ILoggerWriter loggerWriter, IFileWriter fileWriter)
         {
             _option = options.CurrentValue;
             _onChangeToken = options.OnChange(RefreshLogger);
-            _processor = new Processor(_option.MaxQueneCount, loggerWriter);
+            _processor = new Processor(_option.MaxQueneCount, loggerWriter, fileWriter);
         }
 
         /// <summary>

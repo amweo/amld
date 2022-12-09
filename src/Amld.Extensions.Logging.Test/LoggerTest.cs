@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using Amld.Extensions.Logging.DiskFile;
+using Moq;
 
 namespace Amld.Extensions.Logging.Test
 {
@@ -11,7 +12,8 @@ namespace Amld.Extensions.Logging.Test
             var name = "Business.Services.TextEncoderService";
 
             var loggerWriterMock = new Mock<ILoggerWriter>();
-            var logger = new Logger(new Processor(100, loggerWriterMock.Object),name, new LoggerOption());
+            var fileWriterMock = new Mock<IFileWriter>();
+            var logger = new Logger(new Processor(100, loggerWriterMock.Object, fileWriterMock.Object),name, new LoggerOption());
            
             var listKeyPrefix = new List<string>
             {

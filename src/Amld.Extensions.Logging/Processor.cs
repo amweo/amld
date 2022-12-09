@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using Amld.Extensions.Logging.DiskFile;
+using System.Collections.Concurrent;
 
 namespace Amld.Extensions.Logging
 {
@@ -7,8 +8,8 @@ namespace Amld.Extensions.Logging
         private readonly Thread _outputThread;
         private readonly BlockingCollection<LogEntry> _messageQueue;
         private readonly ILoggerWriter loggerWriter;
-
-        public Processor(int maxQuene, ILoggerWriter loggerWriter)
+        private readonly IFileWriter _fileWriter;
+        public Processor(int maxQuene, ILoggerWriter loggerWriter, IFileWriter fileWriter)
         {
             _messageQueue = new BlockingCollection<LogEntry>(maxQuene);
             _outputThread = new Thread(Consumer)
@@ -18,15 +19,14 @@ namespace Amld.Extensions.Logging
             };
             _outputThread.Start();
             this.loggerWriter = loggerWriter;
+            _fileWriter = fileWriter;
         }
 
         public void Enqueue(LogEntry log)
         {
             if (!_messageQueue.TryAdd(log))
             {
-#if DEBUG
-                Console.WriteLine("添加日志失败");
-#endif
+                _fileWriter.Writer(new FileEntry("添加日志失败!"));
             };
         }
         private void Consumer()
@@ -36,18 +36,18 @@ namespace Amld.Extensions.Logging
                 foreach (var log in _messageQueue.GetConsumingEnumerable())
                 {
 
-#if DEBUG
                     loggerWriter.Write(log);
-#endif
                 }
             }
-            catch
+            catch(Exception e)
             {
                 try
                 {
                     _messageQueue.CompleteAdding();
                 }
-                catch{}
+                catch{
+                }
+                _fileWriter.Writer(new FileEntry("消费日志队列失败!" + e.ToString()));
             }
         }
         public void Dispose()

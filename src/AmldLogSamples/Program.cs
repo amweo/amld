@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
+Enhancer.Current.AppId = "amld.log.samples";
+
 using IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureAppConfiguration((hostingContext, config) =>
     {
@@ -16,7 +18,8 @@ using IHost host = Host.CreateDefaultBuilder(args)
         .AddKafkaWriter(context.Configuration);
     }).Build();
 
-Enhancer.Current.AppId = "AmldLogSamples";
+
+
 Enhancer.Current.ChainId = Guid.NewGuid().ToString("N");
 Enhancer.Current.TraceId = Guid.NewGuid().ToString("N");
 Enhancer.Current.ParentTraceId= Guid.NewGuid().ToString("N");

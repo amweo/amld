@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Amld.Extensions.Logging", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Amld.Extensions.Logging.Test", "Amld.Extensions.Logging.Test\Amld.Extensions.Logging.Test.csproj", "{FF426158-0CB5-4AED-81CF-F8ABFC402EA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmldLogSamples", "AmldLogSamples\AmldLogSamples.csproj", "{86EB47F3-3689-416E-AC2F-11766F910091}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AmldLogSamples", "AmldLogSamples\AmldLogSamples.csproj", "{86EB47F3-3689-416E-AC2F-11766F910091}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amld.Extensions.Logging.Kafka", "Amld.Extensions.Logging.Kafka\Amld.Extensions.Logging.Kafka.csproj", "{418894A8-EF12-4E60-A647-A41B20456B33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Amld.Extensions.Logging.Kafka", "Amld.Extensions.Logging.Kafka\Amld.Extensions.Logging.Kafka.csproj", "{418894A8-EF12-4E60-A647-A41B20456B33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amld.Extensions.Logging.RabbitMQ", "Amld.Extensions.Logging.RabbitMQ\Amld.Extensions.Logging.RabbitMQ.csproj", "{62EB94C2-4180-43C2-9675-ED1AC80F82F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{418894A8-EF12-4E60-A647-A41B20456B33}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{418894A8-EF12-4E60-A647-A41B20456B33}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{418894A8-EF12-4E60-A647-A41B20456B33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62EB94C2-4180-43C2-9675-ED1AC80F82F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62EB94C2-4180-43C2-9675-ED1AC80F82F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62EB94C2-4180-43C2-9675-ED1AC80F82F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62EB94C2-4180-43C2-9675-ED1AC80F82F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

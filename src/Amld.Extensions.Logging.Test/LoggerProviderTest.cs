@@ -1,3 +1,4 @@
+using Amld.Extensions.Logging.DiskFile;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
@@ -18,7 +19,9 @@ namespace Amld.Extensions.Logging.Test
             //mock.Object.CurrentValue.LogLevel.Add("System", LogLevel.Warning);
 
             var loggerWriterMock = new Mock<ILoggerWriter>();
-            var loggerProvider = new LoggerProvider(mock.Object, loggerWriterMock.Object);
+
+            var fileWriterMock = new Mock<IFileWriter>();
+            var loggerProvider = new LoggerProvider(mock.Object, loggerWriterMock.Object, fileWriterMock.Object);
 
             var name = "Business.Services.TextEncoderService";
             var logger = loggerProvider.CreateLogger(name);

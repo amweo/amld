@@ -4,10 +4,14 @@ namespace Amld.Extensions.Logging
 {
     public class LoggerOption
     {
+        public string AppId { get; set; }
         /// <summary>
         /// 是否前台打印
         /// </summary>
         public bool Console { get; set; } = false;
+
+
+        public string LocalFilePath { get; set; } = "/var/logs/";
         /// <summary>
         /// 日志级别
         /// </summary>
