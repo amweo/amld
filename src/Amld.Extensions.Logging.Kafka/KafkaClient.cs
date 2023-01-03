@@ -6,7 +6,7 @@ namespace Amld.Extensions.Logging.Kafka
     public class KafkaClient : IKafkaClient
     {
         private static object _lock = new();
-        private IProducer<Null, LogEntry> _producer;
+        private IProducer<Null, string> _producer;
         private KafkaOption _kafkaOption;
         private readonly IDisposable _onChangeToken;
 
@@ -18,7 +18,7 @@ namespace Amld.Extensions.Logging.Kafka
         /// <summary>
         /// 构建Producer
         /// </summary>
-        public IProducer<Null, LogEntry> Producer()
+        public IProducer<Null, string> Producer()
         {
             if (_producer!=null)
             {
@@ -32,9 +32,9 @@ namespace Amld.Extensions.Logging.Kafka
             return _producer;
         }
 
-        private IProducer<Null, LogEntry> Build() 
+        private IProducer<Null, string> Build() 
         {
-            return new ProducerBuilder<Null, LogEntry>(new ProducerConfig
+            return new ProducerBuilder<Null, string>(new ProducerConfig
             {
                 BootstrapServers = _kafkaOption.BootstrapServers,
                 SaslMechanism = (SaslMechanism)_kafkaOption.SaslMechanism,

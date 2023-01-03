@@ -17,7 +17,7 @@ namespace Amld.Extensions.Logging.Kafka
             _options = options;
         }
         //异步写入回调
-        private void AsyncHandler(DeliveryReport<Null, LogEntry> deliveryReport)
+        private void AsyncHandler(DeliveryReport<Null, string> deliveryReport)
         {
             if (deliveryReport.Error.IsError)
             {
@@ -31,7 +31,7 @@ namespace Amld.Extensions.Logging.Kafka
             //异步写入
             producer.Produce(
                _options.Value.Topic,
-               new Message<Null, LogEntry>() { Value = log }, AsyncHandler);
+               new Message<Null, string>() { Value = log.ToJson() }, AsyncHandler);
         }
 
         public void Dispose()
