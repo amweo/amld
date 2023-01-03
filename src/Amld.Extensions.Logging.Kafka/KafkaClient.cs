@@ -37,8 +37,11 @@ namespace Amld.Extensions.Logging.Kafka
             return new ProducerBuilder<Null, string>(new ProducerConfig
             {
                 BootstrapServers = _kafkaOption.BootstrapServers,
-                SaslMechanism = (SaslMechanism)_kafkaOption.SaslMechanism,
-                SecurityProtocol = (SecurityProtocol)_kafkaOption.SecurityProtocol,
+                //SaslMechanism = (SaslMechanism)_kafkaOption.SaslMechanism,
+                //SecurityProtocol = (SecurityProtocol)_kafkaOption.SecurityProtocol,
+                SaslMechanism = SaslMechanism.Plain,
+                //SecurityProtocol = (SecurityProtocol)_kafkaOption.SecurityProtocol,
+                SecurityProtocol = SecurityProtocol.Plaintext,
                 SaslUsername = _kafkaOption.SaslUsername,
                 SaslPassword = _kafkaOption.SaslPassword,
 
