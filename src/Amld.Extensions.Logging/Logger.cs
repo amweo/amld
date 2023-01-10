@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
+using System.Diagnostics;
+using System;
 
 namespace Amld.Extensions.Logging
 {
@@ -68,19 +70,27 @@ namespace Amld.Extensions.Logging
             {
                 return;
             }
-            var log = new LogEntry
+            if (state is LogEntry log)
             {
-                AppId = LoggerOption.AppId,
-                SpanId = LogContext.Current?.SpanId,
-                TraceId = LogContext.Current?.TraceId,
-                ParentTraceId = LogContext.Current?.ParentSpanId,
-                IP = IP,
-                LogLevel = StrLogLevel(logLevel),
-                EventId = eventId.Id,
-                Exception = exception?.ToString(),
-                Message = state?.ToString(),
-                CreateTime= DateTime.Now,
-            };
+
+            }
+            else
+            {
+                log = new LogEntry
+                {
+                    EventId = eventId.Id,
+                    Exception = exception?.ToString(),
+                    Message = state?.ToString(),
+                    CreateTime = DateTime.Now,
+                };
+            }
+            log.AppId = LoggerOption.AppId;
+            log.SpanId = LogContext.Current?.SpanId;
+            log.TraceId = LogContext.Current?.TraceId;
+            log.ParentId = LogContext.Current?.ParentId;
+            log.HostIP = IP;
+            log.LogLevel = StrLogLevel(logLevel);
+
             if (LoggerOption.Console)
             {
                 ConsoleColorPrint(logLevel, log);

@@ -7,21 +7,24 @@
         /// </summary>
         public string? AppId { get; set; }
         /// <summary>
-        /// 链路ID
+        /// 当前SpanId
         /// </summary>
         public string? SpanId { get; set; }
+
         /// <summary>
-        /// 当前TraceId
+        /// 父级SpanId
+        /// </summary>
+        public string? ParentId { get; set; }
+
+        /// <summary>
+        /// 链路ID
         /// </summary>
         public string? TraceId { get; set; }
-        /// <summary>
-        /// 父级TraceId
-        /// </summary>
-        public string? ParentTraceId { get; set; }
+
         /// <summary>
         /// 主机IP
         /// </summary>
-        public string IP { get; set; }
+        public string HostIP { get; set; }
         /// <summary>
         /// 事件Id
         /// </summary>

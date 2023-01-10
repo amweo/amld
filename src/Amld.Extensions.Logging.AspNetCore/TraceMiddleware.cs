@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using System.Net.Http;
 
 namespace Amld.Extensions.Logging.AspNetCore
 {
@@ -16,15 +17,23 @@ namespace Amld.Extensions.Logging.AspNetCore
             _next = next;
         }
 
-        public async Task InvokeAsync(HttpContext context)
+        public async Task InvokeAsync(HttpContext httpContext)
         {
-            LogContext logContext = BuildLogContext(context);
+            var logContext = BuildLogContext(httpContext);
             using var _ = LogContext.SetContxt(logContext);
-            //记录请求URL
-            //记录请求信息
-            //记录响应信息
-            //记录完成时间
-            await _next(context);
+            await _next(httpContext);
+            _logger.LogTrace(LogLevel.Information, new TraceEntry
+            {
+                Request = new Request
+                {
+                    Path = $"{httpContext.Request.Path}{httpContext.Request.QueryString.Value}",
+                    Method = httpContext.Request.Method
+                },
+                Response = new Response
+                {
+                    
+                }
+            });
         }
 
         /// <summary>
@@ -54,7 +63,7 @@ namespace Amld.Extensions.Logging.AspNetCore
             {
                 TraceId = traceId.ToString(),
                 SpanId = spanId.ToString(),
-                ParentSpanId = pSpanId,
+                ParentId = pSpanId,
             };
             return logContext;
         }

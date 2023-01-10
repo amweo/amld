@@ -19,23 +19,16 @@ namespace Amld.Platform.Controllers
         }
 
         [HttpPost("SeedData")]
-        public async Task<bool> SeedData()
+        public async Task<string> SeedData()
         {
 
-           var res = await  elasticsearchClient.IndexAsync(new LogEntry 
-           {
-               AppId= "amld.platform.web",
-               ChainId = Guid.NewGuid().ToString("N")
-           }, "my-tweet-index");
-           return res.IsValidResponse;
-        }
-
-        [HttpGet("GetSeedData")]
-        public async Task<LogEntry> GetSeedData()
-        {
-
-            var response = await elasticsearchClient.GetAsync<LogEntry>(1, idx => idx.Index("my-tweet-index"));
-            return response.Source;
+            //var res = await  elasticsearchClient.IndexAsync(new LogEntry 
+            //{
+            //    AppId= "amld.platform.web",
+            //    ChainId = Guid.NewGuid().ToString("N")
+            //}, "my-tweet-index");
+            //return res.IsValidResponse;
+            return "hello my log";
         }
     }
 }

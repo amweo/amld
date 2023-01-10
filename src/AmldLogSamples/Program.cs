@@ -20,7 +20,7 @@ var context = new LogContext
 {
     TraceId = Guid.NewGuid().ToString("N"),
     SpanId = Guid.NewGuid().ToString("N"),
-    ParentSpanId = Guid.NewGuid().ToString("N")
+    ParentId = Guid.NewGuid().ToString("N")
 };
 using (LogContext.SetContxt(context))
 {
