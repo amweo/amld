@@ -17,4 +17,9 @@
     <Folder Include="Services\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Amld.Extensions.Logging.AspNetCore\Amld.Extensions.Logging.AspNetCore.csproj" />
+    <ProjectReference Include="..\Amld.Extensions.Logging.Kafka\Amld.Extensions.Logging.Kafka.csproj" />
+  </ItemGroup>
+
 </Project>

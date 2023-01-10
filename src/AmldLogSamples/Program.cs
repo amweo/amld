@@ -5,8 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-Enhancer.AppId = "amld.log.samples";
-
 using IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureAppConfiguration((hostingContext, config) =>
     {
@@ -18,19 +16,24 @@ using IHost host = Host.CreateDefaultBuilder(args)
         .AddKafkaWriter(context.Configuration);
     }).Build();
 
+var context = new LogContext
+{
+    TraceId = Guid.NewGuid().ToString("N"),
+    SpanId = Guid.NewGuid().ToString("N"),
+    ParentSpanId = Guid.NewGuid().ToString("N")
+};
+using (LogContext.SetContxt(context))
+{
+    var logger = host.Services.GetRequiredService<ILogger<Program>>();
+
+    logger.LogDebug(1, "Does this line get hit?");    // Not logged
+    logger.LogInformation(3, "Nothing to see here."); // Logs in ConsoleColor.DarkGreen
+    logger.LogWarning(5, "Warning... that was odd."); // Logs in ConsoleColor.DarkCyan
+    logger.LogError(7, "Oops, there was an error.");  // Logs in ConsoleColor.DarkRed
+    logger.LogCritical("应用程序崩溃!");
+    logger.LogTrace(5!, "== 120.");                   // Not logged
+}
 
 
-Enhancer.Current.ChainId = Guid.NewGuid().ToString("N");
-Enhancer.Current.TraceId = Guid.NewGuid().ToString("N");
-Enhancer.Current.ParentTraceId= Guid.NewGuid().ToString("N");
-
-var logger = host.Services.GetRequiredService<ILogger<Program>>();
-
-logger.LogDebug(1, "Does this line get hit?");    // Not logged
-logger.LogInformation(3, "Nothing to see here."); // Logs in ConsoleColor.DarkGreen
-logger.LogWarning(5, "Warning... that was odd."); // Logs in ConsoleColor.DarkCyan
-logger.LogError(7, "Oops, there was an error.");  // Logs in ConsoleColor.DarkRed
-logger.LogCritical("应用程序崩溃!");
-logger.LogTrace(5!, "== 120.");                   // Not logged
 
 await host.RunAsync();

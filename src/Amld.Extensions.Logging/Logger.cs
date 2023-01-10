@@ -70,10 +70,10 @@ namespace Amld.Extensions.Logging
             }
             var log = new LogEntry
             {
-                AppId = Enhancer.AppId,
-                ChainId = Enhancer.Current.ChainId,
-                TraceId = Enhancer.Current.TraceId,
-                ParentTraceId = Enhancer.Current.ParentTraceId,
+                AppId = LoggerOption.AppId,
+                SpanId = LogContext.Current?.SpanId,
+                TraceId = LogContext.Current?.TraceId,
+                ParentTraceId = LogContext.Current?.ParentSpanId,
                 IP = IP,
                 LogLevel = StrLogLevel(logLevel),
                 EventId = eventId.Id,

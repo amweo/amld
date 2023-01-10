@@ -30,7 +30,7 @@ namespace Amld.Extensions.Logging.DiskFile
 
         private void CreateOrUpdateDirectory(LoggerOption loggerOption)
         {
-            _folder = Path.Combine(loggerOption.LocalFilePath, Enhancer.AppId);
+            _folder = Path.Combine(loggerOption.LocalFilePath, loggerOption.AppId);
 
             if (!string.IsNullOrWhiteSpace(_folder) && !Directory.Exists(_folder))
             {

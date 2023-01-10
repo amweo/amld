@@ -5,19 +5,19 @@
         /// <summary>
         /// 应用ID
         /// </summary>
-        public string AppId { get; set; }
+        public string? AppId { get; set; }
         /// <summary>
         /// 链路ID
         /// </summary>
-        public string ChainId { get; set; }
+        public string? SpanId { get; set; }
         /// <summary>
         /// 当前TraceId
         /// </summary>
-        public string TraceId { get; set; }
+        public string? TraceId { get; set; }
         /// <summary>
         /// 父级TraceId
         /// </summary>
-        public string ParentTraceId { get; set; }
+        public string? ParentTraceId { get; set; }
         /// <summary>
         /// 主机IP
         /// </summary>
