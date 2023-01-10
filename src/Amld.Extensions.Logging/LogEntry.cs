@@ -44,6 +44,6 @@
         /// <summary>
         /// 日志时间
         /// </summary>
-        public DateTime CreateTime { get; set; }
+        public DateTime RecordTime { get; set; }
     }
 }

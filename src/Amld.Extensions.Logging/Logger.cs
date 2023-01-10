@@ -76,7 +76,7 @@ namespace Amld.Extensions.Logging
                 EventId = eventId.Id,
                 Exception = exception?.ToString(),
                 Message = state?.ToString(),
-                CreateTime = DateTime.Now,
+
             };
             // 附加信息
             log.AppId = LoggerOption.AppId;
@@ -85,7 +85,7 @@ namespace Amld.Extensions.Logging
             log.ParentId = LogContext.Current?.ParentId;
             log.HostIP = HostIP;
             log.LogLevel = StrLogLevel(logLevel);
-
+            log.RecordTime = DateTime.Now;
             if (LoggerOption.Console)
             {
                 ConsoleColorPrint(logLevel, log);

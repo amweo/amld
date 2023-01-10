@@ -28,6 +28,7 @@ namespace Amld.Platform.Controllers
             //    ChainId = Guid.NewGuid().ToString("N")
             //}, "my-tweet-index");
             //return res.IsValidResponse;
+            _logger.LogInformation("666666666666666666");
             return "hello my log";
         }
         public class MyClass
