@@ -29,6 +29,8 @@ namespace Amld.Platform.Controllers
             //}, "my-tweet-index");
             //return res.IsValidResponse;
             _logger.LogInformation("666666666666666666");
+            _logger.LogWarning("888888");
+            _logger.LogError("dddddddddddddddd");
             return "hello my log";
         }
         public class MyClass
