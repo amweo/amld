@@ -19,13 +19,13 @@ namespace Amld.Extensions.Logging
         /// <summary>
         /// 主机地址
         /// </summary>
-        private readonly string IP;
+        private readonly string HostIP;
 
         public Logger(Processor processor,string categoryName, LoggerOption loggerOption)
         {
             CategoryName = categoryName;
             LoggerOption = loggerOption;
-            IP = NetWorkUtil.GetHostIp();
+            HostIP = NetWorkUtil.GetHostIp();
             _processor = processor;
         }
         public IDisposable? BeginScope<TState>(TState state) where TState : notnull => default!;
@@ -70,25 +70,20 @@ namespace Amld.Extensions.Logging
             {
                 return;
             }
-            if (state is LogEntry log)
+            var log = state as LogEntry;
+            log ??= new LogEntry
             {
-
-            }
-            else
-            {
-                log = new LogEntry
-                {
-                    EventId = eventId.Id,
-                    Exception = exception?.ToString(),
-                    Message = state?.ToString(),
-                    CreateTime = DateTime.Now,
-                };
-            }
+                EventId = eventId.Id,
+                Exception = exception?.ToString(),
+                Message = state?.ToString(),
+                CreateTime = DateTime.Now,
+            };
+            // 附加信息
             log.AppId = LoggerOption.AppId;
             log.SpanId = LogContext.Current?.SpanId;
             log.TraceId = LogContext.Current?.TraceId;
             log.ParentId = LogContext.Current?.ParentId;
-            log.HostIP = IP;
+            log.HostIP = HostIP;
             log.LogLevel = StrLogLevel(logLevel);
 
             if (LoggerOption.Console)

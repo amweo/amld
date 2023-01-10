@@ -19,7 +19,7 @@ namespace Amld.Platform.Controllers
         }
 
         [HttpPost("SeedData")]
-        public async Task<string> SeedData()
+        public async Task<string> SeedData([FromBody] string name)
         {
 
             //var res = await  elasticsearchClient.IndexAsync(new LogEntry 
@@ -29,6 +29,10 @@ namespace Amld.Platform.Controllers
             //}, "my-tweet-index");
             //return res.IsValidResponse;
             return "hello my log";
+        }
+        public class MyClass
+        {
+            public string Name { get; set; }
         }
     }
 }
